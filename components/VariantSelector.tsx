@@ -1,4 +1,3 @@
-// components/VariantSelector.tsx
 "use client";
 
 import { useState } from 'react';
@@ -17,12 +16,10 @@ export default function VariantSelector({ variants }: { variants: Variant[] }) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isBuyingNow, setIsBuyingNow] = useState(false);
   
-  // Trazemos as ações do Zustand
   const { openCart, setCartCredentials } = useCartStore();
 
   const hasOnlyDefaultVariant = variants.length === 1 && variants[0].title === 'Default Title';
 
-  // Função central para lidar com a Shopify
   async function handleCartAction(action: 'add' | 'buy') {
     if (action === 'buy') setIsBuyingNow(true);
     if (action === 'add') setIsAddingToCart(true);
@@ -41,16 +38,13 @@ export default function VariantSelector({ variants }: { variants: Variant[] }) {
 
       const updatedCart = await addToCart(cartId, selectedVariant.id);
       
-      // Atualiza o Zustand com os dados do carrinho
       if (updatedCart.checkoutUrl) {
         setCartCredentials(cartId, updatedCart.checkoutUrl);
       }
 
       if (action === 'buy') {
-        // Vai direto para o checkout
         window.location.href = updatedCart.checkoutUrl || checkoutUrl!;
       } else {
-        // Apenas abre a gaveta lateral
         openCart();
         setIsAddingToCart(false);
       }
@@ -93,7 +87,6 @@ export default function VariantSelector({ variants }: { variants: Variant[] }) {
         </p>
       </div>
 
-      {/* Os dois botões lado a lado */}
       <div className="flex flex-col sm:flex-row gap-3">
         <button 
           onClick={() => handleCartAction('add')}

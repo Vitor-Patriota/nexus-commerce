@@ -1,4 +1,4 @@
-// components/CartDrawer.tsx
+
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -10,9 +10,8 @@ export default function CartDrawer() {
   const { isOpen, closeCart } = useCartStore();
   const [cartData, setCartData] = useState<ShopifyCart | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false); // Novo estado de loading para as ações
+  const [isUpdating, setIsUpdating] = useState(false); 
 
-  // Função para recarregar o carrinho
   async function refreshCart() {
     const cartId = localStorage.getItem('nexus_cart_id');
     if (cartId) {
@@ -22,7 +21,7 @@ export default function CartDrawer() {
   }
 
   useEffect(() => {
-    let isMounted = true; // Controla se o componente ainda está na tela
+    let isMounted = true; 
 
     async function loadCartData() {
       if (!isOpen) return;
@@ -35,15 +34,15 @@ export default function CartDrawer() {
     loadCartData();
 
     return () => {
-      isMounted = false; // Evita memory leaks (atualizar estado de componente desmontado)
+      isMounted = false; 
     };
   }, [isOpen]);
 
-  // Função para alterar quantidade
+  
   async function handleUpdateQuantity(lineId: string, currentQuantity: number, change: number) {
     const newQuantity = currentQuantity + change;
-    if (newQuantity < 1) return; // Evita quantidade zero
-    
+
+    if (newQuantity < 1) return; 
     setIsUpdating(true);
     const cartId = localStorage.getItem('nexus_cart_id');
     if (cartId) {
@@ -53,7 +52,7 @@ export default function CartDrawer() {
     setIsUpdating(false);
   }
 
-  // Função para remover item
+  
   async function handleRemove(lineId: string) {
     setIsUpdating(true);
     const cartId = localStorage.getItem('nexus_cart_id');
@@ -97,7 +96,7 @@ export default function CartDrawer() {
                       <div>
                         <div className="flex justify-between items-start">
                           <h3 className="font-semibold text-gray-900 line-clamp-2">{item.product.title}</h3>
-                          {/* Botão de Remover */}
+                         
                           <button 
                             onClick={() => handleRemove(node.id)}
                             disabled={isUpdating}
@@ -110,7 +109,7 @@ export default function CartDrawer() {
                       </div>
                       
                       <div className="flex justify-between items-center mt-4">
-                        {/* Controles de Quantidade */}
+                    
                         <div className="flex items-center border rounded-md">
                           <button 
                             onClick={() => handleUpdateQuantity(node.id, node.quantity, -1)}

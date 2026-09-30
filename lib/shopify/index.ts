@@ -75,7 +75,6 @@ export async function getProduct(handle: string): Promise<ShopifyProduct | undef
   return res.body.data.product;
 }
 
-//Carrinho
 export async function createCart(): Promise<{ id: string; checkoutUrl: string }> {
   const res = await shopifyFetch<{ data: { cartCreate: { cart: { id: string; checkoutUrl: string } } } }>({
     query: createCartMutation,
@@ -107,7 +106,6 @@ export async function addToCart(cartId: string, variantId: string) {
   return res.body.data.cartLinesAdd.cart;
 }
 
-// lib/shopify/index.ts (Adicione no final)
 
 export async function getCart(cartId: string): Promise<ShopifyCart> {
   const res = await shopifyFetch<{ data: { cart: ShopifyCart } }>({

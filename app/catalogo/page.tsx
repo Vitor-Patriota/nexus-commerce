@@ -1,4 +1,3 @@
-// app/catalogo/page.tsx
 import { getProducts } from '../../lib/shopify';
 import Link from 'next/link';
 

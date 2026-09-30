@@ -68,7 +68,6 @@ export const getProductQuery = `
 `;
 
 
-// 1. Cria um novo carrinho vazio
 export const createCartMutation = `
   mutation createCart {
     cartCreate {
@@ -80,7 +79,6 @@ export const createCartMutation = `
   }
 `;
 
-// 2. Adiciona um item (variante) a um carrinho existente
 export const addToCartMutation = `
   mutation addToCart($cartId: ID!, $lines: [CartLineInput!]!) {
     cartLinesAdd(cartId: $cartId, lines: $lines) {
@@ -150,7 +148,6 @@ export const getCartQuery = `
   }
 `;
 
-// lib/shopify/queries.ts (Adicione no final)
 
 export const updateCartQuantityMutation = `
   mutation updateCartQuantity($cartId: ID!, $lines: [CartLineUpdateInput!]!) {

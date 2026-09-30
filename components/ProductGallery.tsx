@@ -1,4 +1,3 @@
-// components/ProductGallery.tsx
 "use client";
 
 import { useState } from 'react';
@@ -11,14 +10,12 @@ type ImageType = {
 export default function ProductGallery({ images }: { images: ImageType[] }) {
   const [mainImage, setMainImage] = useState<ImageType>(images[0]);
 
-  // Se o produto não tiver imagens, mostramos um bloco cinza
   if (!images || images.length === 0) {
     return <div className="aspect-square bg-gray-100 rounded-3xl" />;
   }
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Imagem Principal */}
       <div className="aspect-square w-full bg-gray-50 rounded-3xl overflow-hidden border border-gray-100 relative group">
         <img 
           src={mainImage.url} 
@@ -27,7 +24,6 @@ export default function ProductGallery({ images }: { images: ImageType[] }) {
         />
       </div>
 
-      {/* Miniaturas (Thumbnails) */}
       {images.length > 1 && (
         <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
           {images.map((img, index) => {

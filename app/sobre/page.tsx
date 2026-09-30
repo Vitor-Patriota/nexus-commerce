@@ -1,4 +1,3 @@
-// app/sobre/page.tsx
 export default function SobrePage() {
   return (
     <main className="max-w-3xl mx-auto px-4 py-20 min-h-screen">
