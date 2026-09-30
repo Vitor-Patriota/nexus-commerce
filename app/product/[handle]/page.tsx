@@ -1,7 +1,9 @@
 // app/product/[handle]/page.tsx
 import { getProduct } from '../../../lib/shopify';
 import { notFound } from 'next/navigation';
-import VariantSelector from '../../../components/VariantSelector'; 
+import Link from 'next/link';
+import VariantSelector from '../../../components/VariantSelector';
+import ProductGallery from '../../../components/ProductGallery';
 
 export default async function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
   const resolvedParams = await params;
@@ -11,40 +13,60 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
     return notFound();
   }
 
-  const mainImage = product.images.edges[0]?.node;
+  // Extrai as imagens do formato GraphQL para um array simples
+  const images = product.images.edges.map((edge) => edge.node);
 
   return (
-    <main className="mx-auto max-w-7xl p-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden relative">
-          {mainImage && (
-            <img 
-              src={mainImage.url} 
-              alt={mainImage.altText || product.title}
-              className="w-full h-full object-cover"
-            />
-          )}
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+      
+      {/* Navegação (Breadcrumb) */}
+      <nav className="mb-8 text-sm text-gray-500 font-medium">
+        <Link href="/" className="hover:text-black transition-colors">Início</Link>
+        <span className="mx-3">/</span>
+        <span className="text-black">{product.title}</span>
+      </nav>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+        
+        {/* Esquerda: Galeria de Imagens Interativa */}
+        <div className="w-full">
+          <ProductGallery images={images} />
         </div>
 
-        <div className="flex flex-col gap-6">
-          <h1 className="text-4xl font-bold text-gray-900">{product.title}</h1>
+        {/* Direita: Informações e Compra */}
+        <div className="flex flex-col pt-4 md:pt-10">
+          <h1 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">
+            {product.title}
+          </h1>
           
-          <p className="text-2xl text-gray-700">
-            {Number(product.priceRange.minVariantPrice.amount).toLocaleString('pt-BR', { 
-              style: 'currency', 
-              currency: product.priceRange.minVariantPrice.currencyCode 
-            })}
-          </p>
+          <div className="text-gray-600 text-lg leading-relaxed mb-10">
+            <p>{product.description}</p>
+          </div>
           
-          <p className="text-gray-600 leading-relaxed">{product.description}</p>
+          <hr className="border-gray-200 mb-10" />
           
-          <hr className="my-4" />
-          
-          {/* O Seletor de Variantes Interativo */}
+          {/* Seletor de Variantes e Botões (Componente Cliente que já criámos) */}
           <VariantSelector 
             variants={product.variants?.edges.map((edge) => edge.node) || []} 
           />
+          
+          {/* Informações extra (Trust Badges) */}
+          <div className="mt-12 grid grid-cols-2 gap-4 text-sm text-gray-500 border-t pt-8">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              Garantia de Qualidade
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              Pagamento Seguro
+            </div>
+          </div>
         </div>
+
       </div>
     </main>
   );

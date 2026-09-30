@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import CartDrawer from "../components/CartDrawer";
+import Header from "../components/Header"; // <-- 1. Importação nova aqui
 
-// Usando a fonte Inter diretamente do Google Fonts (não precisa de arquivo local)
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,11 +20,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${inter.className} antialiased`}>
+        
+        {/* 2. Adicionamos o Header aqui */}
+        <Header />
+        
         {children}
-        
-        {/* A nossa gaveta do carrinho global */}
         <CartDrawer /> 
-        
       </body>
     </html>
   );
