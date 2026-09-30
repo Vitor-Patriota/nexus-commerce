@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexus Commerce 
 
-## Getting Started
+Um e-commerce headless de alta performance construído com uma arquitetura moderna, focada em velocidade extrema, SEO dinâmico e uma experiência de utilizador fluida (Mobile-First). 
 
-First, run the development server:
+Este projeto demonstra a integração entre a robustez do **Next.js (App Router)** e a flexibilidade da **Shopify Storefront API**, resultando numa loja virtual totalmente personalizável e escalável.
 
+![Nexus Commerce Preview](https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop)
+
+##  Tecnologias Utilizadas
+
+*   **Framework:** [Next.js 15+](https://nextjs.org/) (App Router, Server Components, Server Actions)
+*   **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
+*   **E-commerce Engine:** [Shopify Storefront API](https://shopify.dev/docs/api/storefront) (GraphQL)
+*   **Estilização:** [Tailwind CSS v4](https://tailwindcss.com/)
+*   **Gestão de Estado:** [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) (Para o carrinho de compras)
+*   **Tematização:** `next-themes` (Dark/Light mode nativo e sem cintilação)
+
+##  Funcionalidades Principais
+
+*   **Arquitetura Headless:** O frontend em Next.js comunica diretamente com o backend da Shopify via GraphQL, garantindo tempos de resposta ultrarrápidos.
+*   **Carrinho Global (Drawer):** Gestão de estado do carrinho gerida pelo Zustand, permitindo adicionar, remover e atualizar itens sem recarregar a página.
+*   **Dark Mode Nativo:** Suporte completo para modo escuro/claro gerido por classes do Tailwind v4 e sincronizado com as preferências do utilizador.
+*   **SEO Dinâmico & Open Graph:** Metadados gerados dinamicamente no servidor para cada produto, garantindo pré-visualizações ricas ao partilhar links em redes sociais (WhatsApp, LinkedIn, etc.).
+*   **Galeria de Imagens Interativa:** Visualização detalhada de produtos com miniaturas interativas e seletores de variantes precisos.
+*   **Design Mobile-First:** Interface totalmente responsiva com navegação adaptada para dispositivos móveis (Menu Hambúrguer, Touch-friendly).
+
+##  Como correr o projeto localmente
+
+### Pré-requisitos
+*   Node.js (versão 18 ou superior)
+*   Uma conta de parceiro Shopify com a Storefront API configurada.
+
+### Instalação
+
+1. Clone este repositório:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone [https://github.com/teu-usuario/nexus-commerce.git](https://github.com/teu-usuario/nexus-commerce.git)
