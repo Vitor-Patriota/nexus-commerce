@@ -1,26 +1,23 @@
 @import "tailwindcss";
 
+/* Ativa o Dark Mode manual por classe no Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Variáveis para o tema claro */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Variáveis para o tema escuro - O segredo está aqui na classe .dark */
+.dark {
+  --background: #0a0a0a; /* Fundo cinza muito escuro/preto */
+  --foreground: #ededed; /* Texto claro */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Aplica as variáveis globalmente à tag body */
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

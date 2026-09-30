@@ -46,11 +46,13 @@ export default async function Home() {
               <Link 
                 href={`/product/${product.handle}`} 
                 key={product.id} 
-                className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100"
+                // Mudança 1: Adicionado dark:bg-gray-900 e dark:border-gray-800
+                className="group flex flex-col h-full bg-white dark:bg-gray-900 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800"
               >
                 {/* Imagem do Produto */}
-                <div className="aspect-square w-full bg-gray-50 relative overflow-hidden">
-                  {image && (
+                {/* Mudança 2: Adicionado dark:bg-gray-800 */}
+                <div className="aspect-square w-full bg-gray-50 dark:bg-gray-800 relative overflow-hidden">
+                   {image && (
                     <img
                       src={image.url}
                       alt={image.altText || product.title}
@@ -61,17 +63,18 @@ export default async function Home() {
                 
                 {/* Informações do Produto */}
                 <div className="p-6 flex flex-col flex-1">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  {/* Mudança 3: dark:text-white */}
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-500 transition-colors">
                     {product.title}
                   </h3>
-                  <p className="text-sm text-gray-500 line-clamp-2 mb-4 flex-1">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-4 flex-1">
                     {product.description}
                   </p>
                   <div className="flex items-center justify-between mt-auto">
-                    <p className="font-black text-xl text-black">
+                    <p className="font-black text-xl text-black dark:text-white">
                       {Number(price).toLocaleString('pt-BR', { style: 'currency', currency: currency === 'BRL' ? 'BRL' : 'USD' })}
                     </p>
-                    <span className="bg-black text-white text-xs font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="bg-black dark:bg-white text-white dark:text-black text-xs font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
                       Ver mais
                     </span>
                   </div>
